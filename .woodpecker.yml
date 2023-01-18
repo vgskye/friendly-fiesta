@@ -17,5 +17,5 @@ pipeline:
         from_secret: aws_secret_access_key
       source: build/**/*
       target: /${CI_COMMIT_SHA}
-      acl: public
+      acl: public-read
       endpoint: https://s3.us-west-004.backblazeb2.com
