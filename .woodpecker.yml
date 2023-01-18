@@ -19,6 +19,6 @@ pipeline:
   notify:
     image: curlimages/curl
     commands:
-      - 'curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"Job $CI_SYSTEM_LINK finished\nLink: https://tjt-ci.skyevg.systems/$CI_COMMIT_SHA/build/index.html\"}" $WEBHOOK_LINK'
+      - 'curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"Job $CI_SYSTEM_LINK/$CI_REPO_OWNER/$CI_REPO_NAME/build/$CI_JOB_NUMBER finished\nLink: https://tjt-ci.skyevg.systems/$CI_COMMIT_SHA/build/index.html\"}" $WEBHOOK_LINK'
     secrets:
       - webhook_link
