@@ -8,10 +8,13 @@ pipeline:
     commands:
       - godot --headless --export-release Web build/index.html
   upload:
-    image: skyevg/wrangler:latest
-    commands:
-      - wrangler pages publish build/ --project-name $CI_REPO_NAME --commit-hash $CI_COMMIT_SHA --branch $CI_COMMIT_REF
-    environment:
-      - CLOUDFLARE_ACCOUNT_ID=352f8084962a33cd92ca448b5aec6d5e
-    secrets:
-      - CLOUDFLARE_API_TOKEN
+    image: woodpeckerci/plugin-s3
+    settings:
+      bucket: tjt-builds
+      access_key:
+        from_secret: aws_access_key_id
+      secret_key:
+        from_secret: aws_secret_access_key
+      source: build/**/*
+      target: /${CI_COMMIT_SHA}
+      endpoint: https://s3.us-west-004.backblazeb2.com
