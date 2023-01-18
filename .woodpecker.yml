@@ -16,3 +16,9 @@ pipeline:
       target: /${CI_COMMIT_SHA}
       acl: public-read
       endpoint: https://s3.us-west-004.backblazeb2.com
+  notify:
+    image: curlimages/curl
+    commands:
+      - 'curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"content\": \"Job $CI_BUILD_LINK finished\nLink: https://tjt-ci.skyevg.systems/$CI_COMMIT_SHA/build/index.html\"}" $WEBHOOK_LINK'
+    secrets:
+      - webhook_link
