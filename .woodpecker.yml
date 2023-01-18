@@ -11,3 +11,5 @@ pipeline:
     image: skyevg/wrangler:latest
     commands:
       - wrangler pages publish build/ --project-name $CI_REPO_NAME --commit-hash $CI_COMMIT_SHA --branch $CI_COMMIT_REF
+    secrets:
+      - CLOUDFLARE_API_TOKEN
