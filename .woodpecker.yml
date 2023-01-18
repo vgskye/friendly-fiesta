@@ -1,11 +1,8 @@
 pipeline:
-  prepare:
-    image: alpine
-    commands:
-      - mkdir build
   build:
     image: skyevg/nix-godot-ci:latest
     commands:
+      - mkdir build
       - godot --headless --export-release Web build/index.html
   upload:
     image: woodpeckerci/plugin-s3
