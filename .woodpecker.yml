@@ -1,0 +1,13 @@
+pipeline:
+  prepare:
+    image: alpine
+    commands:
+      - mkdir build
+  build:
+    image: skyevg/nix-godot-ci:latest
+    commands:
+      - godot --headless --export-release Web build/index.html
+  upload:
+    image: skyevg/wrangler:latest
+    commands:
+      - wrangler pages publish build/ --project-name $CI_REPO_NAME --commit-hash $CI_COMMIT_SHA --branch $CI_COMMIT_REF
